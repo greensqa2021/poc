@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"BancoPopular"},
-        tags = {"@novalidid or @validid"},
+        tags = {"@login"},
         plugin = {
                 "pretty",
                 "json:build/cucumber-report/cucumber.json",

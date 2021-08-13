@@ -3,11 +3,11 @@
     "line": 2,
     "elements": [
       {
-        "start_timestamp": "2021-08-13T18:45:46.040Z",
+        "start_timestamp": "2021-08-13T20:09:39.111Z",
         "before": [
           {
             "result": {
-              "duration": 5624000000,
+              "duration": 17417000000,
               "status": "passed"
             },
             "match": {
@@ -16,13 +16,13 @@
           }
         ],
         "line": 4,
-        "name": "An invalid id is allowed",
+        "name": "login with invalid ID",
         "description": "",
-        "id": "no-valid-id;an-invalid-id-is-allowed",
+        "id": "do-login;login-with-invalid-id",
         "after": [
           {
             "result": {
-              "duration": 1223000000,
+              "duration": 1184000000,
               "status": "passed"
             },
             "match": {
@@ -35,7 +35,7 @@
         "steps": [
           {
             "result": {
-              "duration": 5391000000,
+              "duration": 5063000000,
               "status": "passed"
             },
             "line": 5,
@@ -47,7 +47,7 @@
           },
           {
             "result": {
-              "duration": 145000000,
+              "duration": 181000000,
               "status": "passed"
             },
             "line": 6,
@@ -59,7 +59,7 @@
           },
           {
             "result": {
-              "duration": 454000000,
+              "duration": 520000000,
               "status": "passed"
             },
             "line": 7,
@@ -71,7 +71,7 @@
           },
           {
             "result": {
-              "duration": 6235000000,
+              "duration": 9877000000,
               "status": "passed"
             },
             "line": 8,
@@ -83,7 +83,7 @@
           },
           {
             "result": {
-              "duration": 250000000,
+              "duration": 195000000,
               "status": "passed"
             },
             "line": 9,
@@ -95,7 +95,7 @@
           },
           {
             "result": {
-              "duration": 4578000000,
+              "duration": 3671000000,
               "status": "passed"
             },
             "line": 10,
@@ -108,16 +108,16 @@
         ],
         "tags": [
           {
-            "name": "@novalidid"
+            "name": "@login"
           }
         ]
       },
       {
-        "start_timestamp": "2021-08-13T18:46:10.125Z",
+        "start_timestamp": "2021-08-13T20:10:17.994Z",
         "before": [
           {
             "result": {
-              "duration": 2680000000,
+              "duration": 2934000000,
               "status": "passed"
             },
             "match": {
@@ -126,13 +126,13 @@
           }
         ],
         "line": 12,
-        "name": "An valid id is allowed",
+        "name": "login with valid ID",
         "description": "",
-        "id": "no-valid-id;an-valid-id-is-allowed",
+        "id": "do-login;login-with-valid-id",
         "after": [
           {
             "result": {
-              "duration": 1095000000,
+              "duration": 1311000000,
               "status": "passed"
             },
             "match": {
@@ -145,7 +145,7 @@
         "steps": [
           {
             "result": {
-              "duration": 4454000000,
+              "duration": 5829000000,
               "status": "passed"
             },
             "line": 13,
@@ -157,7 +157,7 @@
           },
           {
             "result": {
-              "duration": 117000000,
+              "duration": 253000000,
               "status": "passed"
             },
             "line": 14,
@@ -169,7 +169,7 @@
           },
           {
             "result": {
-              "duration": 434000000,
+              "duration": 751000000,
               "status": "passed"
             },
             "line": 15,
@@ -181,7 +181,7 @@
           },
           {
             "result": {
-              "duration": 5648000000,
+              "duration": 9940000000,
               "status": "passed"
             },
             "line": 16,
@@ -193,7 +193,7 @@
           },
           {
             "result": {
-              "duration": 137000000,
+              "duration": 163000000,
               "status": "passed"
             },
             "line": 17,
@@ -205,7 +205,7 @@
           },
           {
             "result": {
-              "duration": 1739000000,
+              "duration": 1958000000,
               "status": "passed"
             },
             "line": 18,
@@ -218,149 +218,19 @@
         ],
         "tags": [
           {
-            "name": "@novalidid"
+            "name": "@login"
           }
         ]
       }
     ],
-    "name": "No valid ID",
+    "name": "Do Login",
     "description": "",
-    "id": "no-valid-id",
+    "id": "do-login",
     "keyword": "Feature",
     "uri": "file:src/test/resources/features/novalidid.feature",
     "tags": [
       {
-        "name": "@novalidid",
-        "type": "Tag",
-        "location": {
-          "line": 1,
-          "column": 1
-        }
-      }
-    ]
-  },
-  {
-    "line": 2,
-    "elements": [
-      {
-        "start_timestamp": "2021-08-13T18:46:26.440Z",
-        "before": [
-          {
-            "result": {
-              "duration": 2537000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "BancoPopular.Steps.setUp()"
-            }
-          }
-        ],
-        "line": 4,
-        "name": "An valid id is allowed",
-        "description": "",
-        "id": "valid-id;an-valid-id-is-allowed",
-        "after": [
-          {
-            "result": {
-              "duration": 1172000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "BancoPopular.Steps.tearDown()"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 4521000000,
-              "status": "passed"
-            },
-            "line": 5,
-            "name": "Navigate to page BancoPopular",
-            "match": {
-              "location": "BancoPopular.Steps.navigateToPageBancoPopular()"
-            },
-            "keyword": "Given "
-          },
-          {
-            "result": {
-              "duration": 103000000,
-              "status": "passed"
-            },
-            "line": 6,
-            "name": "A User clicks on popup close",
-            "match": {
-              "location": "BancoPopular.Steps.aUserClicksOnPopupClose()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 478000000,
-              "status": "passed"
-            },
-            "line": 7,
-            "name": "A User clicks on persons button",
-            "match": {
-              "location": "BancoPopular.Steps.aUserClicksOnPersonsButton()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 5495000000,
-              "status": "passed"
-            },
-            "line": 8,
-            "name": "A User enter an valid id",
-            "match": {
-              "location": "BancoPopular.Steps.aUserEntersAnValidId()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 187000000,
-              "status": "passed"
-            },
-            "line": 9,
-            "name": "A User clicks on continue button",
-            "match": {
-              "location": "BancoPopular.Steps.aUserClicksOnContinueButton()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 1651000000,
-              "status": "passed"
-            },
-            "line": 10,
-            "name": "Applications show message Escribe tu contrasena",
-            "match": {
-              "location": "BancoPopular.Steps.applicationShowsMessageEscribeTuContrasena()"
-            },
-            "keyword": "Then "
-          }
-        ],
-        "tags": [
-          {
-            "name": "@validid"
-          }
-        ]
-      }
-    ],
-    "name": "Valid ID",
-    "description": "",
-    "id": "valid-id",
-    "keyword": "Feature",
-    "uri": "file:src/test/resources/features/validid.feature",
-    "tags": [
-      {
-        "name": "@validid",
+        "name": "@login",
         "type": "Tag",
         "location": {
           "line": 1,
