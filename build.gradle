@@ -9,6 +9,24 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'BancoPopular', 'src/test/resources']
+        }
+    }
+}
+
+
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
