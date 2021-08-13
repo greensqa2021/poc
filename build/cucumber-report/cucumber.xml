@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="30.625">
+<testcase classname="No valid ID" name="An invalid id is allowed" time="28.136">
+<system-out><![CDATA[Given Navigate to page BancoPopular.........................................passed
+When A User clicks on popup close...........................................passed
+And A User clicks on persons button.........................................passed
+And A User enter an invalid id..............................................passed
+And A User clicks on continue button........................................passed
+Then Applications show message Algo Salio Mal...............................passed
+]]></system-out>
+</testcase>
+</testsuite>

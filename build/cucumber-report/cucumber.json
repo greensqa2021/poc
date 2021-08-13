@@ -1,0 +1,132 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2021-08-13T15:06:32.308Z",
+        "before": [
+          {
+            "result": {
+              "duration": 10322000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "BancoPopular.NoValidId.setUp()"
+            }
+          }
+        ],
+        "line": 4,
+        "name": "An invalid id is allowed",
+        "description": "",
+        "id": "no-valid-id;an-invalid-id-is-allowed",
+        "after": [
+          {
+            "result": {
+              "duration": 1633000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "BancoPopular.NoValidId.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5107000000,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Navigate to page BancoPopular",
+            "match": {
+              "location": "BancoPopular.NoValidId.navigateToPageBancoPopular()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 155000000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "A User clicks on popup close",
+            "match": {
+              "location": "BancoPopular.NoValidId.aUserClicksOnPopupClose()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 471000000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "A User clicks on persons button",
+            "match": {
+              "location": "BancoPopular.NoValidId.aUserClicksOnPersonsButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 6249000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "A User enter an invalid id",
+            "match": {
+              "location": "BancoPopular.NoValidId.aUserEntersAnInvalidId()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 143000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "A User clicks on continue button",
+            "match": {
+              "location": "BancoPopular.NoValidId.aUserClicksOnContinueButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3621000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Applications show message Algo Salio Mal",
+            "match": {
+              "location": "BancoPopular.NoValidId.applicationShowsMessageAlgoSalioMal()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@novalidid"
+          }
+        ]
+      }
+    ],
+    "name": "No valid ID",
+    "description": "",
+    "id": "no-valid-id",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/novalidid.feature",
+    "tags": [
+      {
+        "name": "@novalidid",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
