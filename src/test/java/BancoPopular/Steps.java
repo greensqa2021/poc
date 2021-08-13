@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 import static org.hamcrest.Matchers.is;
 
 
-public class NoValidId {
+public class Steps {
     private WebDriver driver;
 
     @Before
@@ -78,6 +78,22 @@ public class NoValidId {
         String actualMessage = driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-alert/div/form/div/div/h4")).getText();
 
          MatcherAssert.assertThat ((actualMessage.substring(1, 5)), is("Algo"));
+    }
+
+    @And("A User enter an valid id")
+    public void aUserEntersAnValidId() {
+        ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(tabs2.get(1));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
+        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("3012602");
+    }
+
+    @Then("Applications show message Escribe tu contrasena")
+    public void applicationShowsMessageEscribeTuContrasena() {
+        String actualMessage = driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-validate-universal-password/div[2]/div/h4")).getText();
+
+        MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
     }
 
 }
