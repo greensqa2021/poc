@@ -1,5 +1,7 @@
 package BancoPopular;
 
+import Utils.Configuracion;
+import Utils.Utilities;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -26,33 +28,31 @@ public class Steps {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver",
-                Paths.get("src/test/resources/chromedriver_win32/chromedriver.exe").toString());
-        if (driver == null) {
-            driver = new ChromeDriver();
-        }
+        Configuracion.iniciarConfiguracion();
+
     }
     @After
     public void tearDown() {
-        if (driver!=null) {
-            driver.close();
-            driver.quit();
+
+        if (Configuracion.driver!=null) {
+            Configuracion.driver.close();
+            Configuracion.driver.quit();
         }
     }
 
     @Given("Navigate to page BancoPopular")
     public void navigateToPageBancoPopular() {
-        driver.navigate().to("https://www.bancopopular.com.co/");
+        Configuracion.driver.navigate().to("https://www.bancopopular.com.co/");
     }
 
     @When("A User clicks on popup close")
     public void aUserClicksOnPopupClose() {
-        driver.findElement(By.xpath("/html/body/div/div[2]/div/div[2]/div[2]/div/section/div[2]/div/div/a")).click();
+        Configuracion.driver.findElement(By.xpath("/html/body/div/div[2]/div/div[2]/div[2]/div/section/div[2]/div/div/a")).click();
     }
 
     @And("A User clicks on persons button")
     public void aUserClicksOnPersonsButton() {
-        driver.findElement(By.id("newbp-mp-zona-transaccional-personas")).click();
+        Configuracion.driver.findElement(By.id("newbp-mp-zona-transaccional-personas")).click();
     }
 
     @And("A User enter an invalid id")
@@ -61,37 +61,40 @@ public class Steps {
         //wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/h4")),
           //      "Ingresa a tu zona transaccional"));
 
-        ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-        driver.switchTo().window(tabs2.get(1));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
-        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("877878877");
+        ArrayList<String> tabs2 = new ArrayList<String> (Configuracion.driver.getWindowHandles());
+        Configuracion.driver.switchTo().window(tabs2.get(1));
+        Configuracion.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
+        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("877878877");
     }
 
     @And("A User clicks on continue button")
     public void aUserClicksOnContinueButton() {
-        driver.findElement(By.id("btn_login")).click();
+        Configuracion.driver.findElement(By.id("btn_login")).click();
     }
 
     @Then("Applications show message Algo Salio Mal")
     public void applicationShowsMessageAlgoSalioMal() {
-        String actualMessage = driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-alert/div/form/div/div/h4")).getText();
+       // WebDriverWait wait = new WebDriverWait(driver, 20);
+        //wait.until(ExpectedConditions. (driver.findElement(By.xpath("//h4[contains(text(),'Algo')]")), "¡Algo salió mal!")););
+        String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Algo')]","xpath",15).getText();
+
 
          MatcherAssert.assertThat ((actualMessage.substring(1, 5)), is("Algo"));
     }
 
     @And("A User enter an valid id")
     public void aUserEntersAnValidId() {
-        ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-        driver.switchTo().window(tabs2.get(1));
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
-        driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("3012602");
+        ArrayList<String> tabs2 = new ArrayList<String> (Configuracion.driver.getWindowHandles());
+        Configuracion.driver.switchTo().window(tabs2.get(1));
+        Configuracion.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
+        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("3012602");
     }
 
     @Then("Applications show message Escribe tu contrasena")
     public void applicationShowsMessageEscribeTuContrasena() {
-        String actualMessage = driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-validate-universal-password/div[2]/div/h4")).getText();
+        String actualMessage = Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-validate-universal-password/div[2]/div/h4")).getText();
 
         MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
     }
