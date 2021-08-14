@@ -2,6 +2,10 @@ package BancoPopular;
 
 import Utils.Configuracion;
 import Utils.Utilities;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.greensqa.zapiconsumer.ZephyrClient;
+import com.greensqa.zapiutil.dto.Status;
+import com.greensqa.zapiutil.dto.TestCaseExecution;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -29,6 +33,7 @@ public class Steps {
     @Before
     public void setUp() {
         Configuracion.iniciarConfiguracion();
+        Configuracion.iniciarZapiClientV1();
 
     }
     @After
@@ -74,13 +79,21 @@ public class Steps {
     }
 
     @Then("Applications show message Algo Salio Mal")
-    public void applicationShowsMessageAlgoSalioMal() {
-       // WebDriverWait wait = new WebDriverWait(driver, 20);
-        //wait.until(ExpectedConditions. (driver.findElement(By.xpath("//h4[contains(text(),'Algo')]")), "¡Algo salió mal!")););
+    public void applicationShowsMessageAlgoSalioMal() throws JsonProcessingException {
+
         String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Algo')]","xpath",15).getText();
 
+        TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10017, 10001, "-1");
 
-         MatcherAssert.assertThat ((actualMessage.substring(1, 5)), is("Algo"));
+        if((actualMessage.substring(1, 5)).equals("Algo")){
+            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
+        }else{
+            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto algo salio mal");
+
+        }
+
+        MatcherAssert.assertThat ((actualMessage.substring(1, 5)), is("Algo"));
+
     }
 
     @And("A User enter an valid id")
@@ -93,10 +106,21 @@ public class Steps {
     }
 
     @Then("Applications show message Escribe tu contrasena")
-    public void applicationShowsMessageEscribeTuContrasena() {
+    public void applicationShowsMessageEscribeTuContrasena() throws JsonProcessingException {
         String actualMessage = Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-validate-universal-password/div[2]/div/h4")).getText();
 
+        TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
+
+        if((actualMessage.substring(0, 7)).equals("Escribe")){
+            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
+        }else{
+            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto escribe la contraseña");
+
+        }
+
         MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
+
+
     }
 
 }

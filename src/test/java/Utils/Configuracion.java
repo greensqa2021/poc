@@ -1,5 +1,7 @@
 package Utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.greensqa.zapiutil.ZapiClientV1;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +26,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class Configuracion {
     public static WebDriver driver;
     public static JavascriptExecutor js;
+    public static ZapiClientV1 zcv1;
+
+
+    private static final String ACCOUNT_ID = "raparrap@gmail.com:61158ac975ad960069aeec33";
+    private static final String ACCESS_KEY = "Y2IzNDBiMDYtZjUzOS0zZDc1LWE4ZjgtODY0YTA4NDk5MDhhIDU1NzA1OCUzQTg5ZjdiNjNlLTU3ODAtNDM2Ny1hMDdiLTNmOTY3MDI2OTgxMyBVU0VSX0RFRkFVTFRfTkFNRQ";
+    private static final String SECRET_KEY = "dXhn_yIclf63W1zn2RnZ6claVmf1U-spujvKuY8BDXg";
+
+
+    public static void iniciarZapiClientV1() {
+
+        zcv1 = new ZapiClientV1(ACCOUNT_ID, ACCESS_KEY, SECRET_KEY);
+    }
+
 
     public static void iniciarConfiguracion(){
 
