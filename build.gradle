@@ -43,6 +43,7 @@ dependencies {
     testImplementation 'org.junit.platform:junit-platform-commons:1.5.2'
 
     implementation files ('src\\test\\resources\\integracion\\green_zapi_client-1.0.0.jar')
+    implementation files ('src\\test\\resources\\greenheart\\sdk_greenheart_java.jar')
 }
 
 test {

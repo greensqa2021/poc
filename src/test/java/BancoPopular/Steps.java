@@ -1,8 +1,10 @@
 package BancoPopular;
 
 import Utils.Configuracion;
+import Utils.FunctionalMonitoring;
 import Utils.Utilities;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Stopwatch;
 import com.greensqa.zapiconsumer.ZephyrClient;
 import com.greensqa.zapiutil.dto.Status;
 import com.greensqa.zapiutil.dto.TestCaseExecution;
@@ -14,6 +16,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.hamcrest.MatcherAssert;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,12 +35,28 @@ import static org.hamcrest.Matchers.is;
 
 public class Steps {
     private WebDriver driver;
+    private Stopwatch stopwatch;
+    private Boolean result;
+    private String robotName;
+
+    @BeforeAll
+    public static void setup() {
+        System.out.println("INICIO TIEMPO");
+    }
+
+    @AfterAll
+    public static void teardown() {
+        System.out.println("FIN TIEMPO");
+    }
+
 
     @Before
     public void setUp() {
         Configuracion.iniciarConfiguracion();
         Configuracion.iniciarZapiClientV1();
-
+        stopwatch = Stopwatch.createStarted();
+        result = false;
+        System.out.println("INICIO TIEMPO");
     }
     @After
     public void tearDown() {
@@ -43,6 +65,10 @@ public class Steps {
             Configuracion.driver.close();
             Configuracion.driver.quit();
         }
+        stopwatch.stop();
+        long millis = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+        System.out.println("tiempo: " + millis);
+        FunctionalMonitoring.publish(25000, 35000, millis, result, robotName);
     }
 
     @Given("Navigate to page BancoPopular")
@@ -62,14 +88,12 @@ public class Steps {
 
     @And("A User enter an invalid id")
     public void aUserEntersAnInvalidId() {
-        //WebDriverWait wait = new WebDriverWait(driver, 10);
-        //wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/h4")),
-          //      "Ingresa a tu zona transaccional"));
+
 
         ArrayList<String> tabs2 = new ArrayList<String> (Configuracion.driver.getWindowHandles());
         Configuracion.driver.switchTo().window(tabs2.get(1));
         Configuracion.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
+        //Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
         Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("877878877");
     }
 
@@ -84,10 +108,12 @@ public class Steps {
         String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Algo')]","xpath",15).getText();
 
         TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10017, 10001, "-1");
-
+        robotName="BotPocPopular_LoginInvalido";
         if((actualMessage.substring(1, 5)).equals("Algo")){
+            System.out.println("CASO OK"); result = true;
             ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
         }else{
+            System.out.println("CASO FALLIDO");
             ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto algo salio mal");
 
         }
@@ -101,21 +127,23 @@ public class Steps {
         ArrayList<String> tabs2 = new ArrayList<String> (Configuracion.driver.getWindowHandles());
         Configuracion.driver.switchTo().window(tabs2.get(1));
         Configuracion.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
+        //Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
         Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("3012602");
     }
 
     @Then("Applications show message Escribe tu contrasena")
     public void applicationShowsMessageEscribeTuContrasena() throws JsonProcessingException {
-        String actualMessage = Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-enrollment/div/div/app-validate-universal-password/div[2]/div/h4")).getText();
+        String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Escribe')]","xpath",15).getText();
 
         TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
-
+        robotName="BotPocPopular_LoginValido";
         if((actualMessage.substring(0, 7)).equals("Escribe")){
+
+            System.out.println("CASO OK"); result = true;
             ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
         }else{
             ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto escribe la contraseña");
-
+            System.out.println("CASO FALLIDO");
         }
 
         MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
