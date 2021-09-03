@@ -104,21 +104,26 @@ public class Steps {
 
     @Then("Applications show message Algo Salio Mal")
     public void applicationShowsMessageAlgoSalioMal() throws JsonProcessingException {
+      try {
+          String actualMessage = Utilities.esperarElemento("//h4[contains(text(),'Algo')]", "xpath", 15).getText();
+          TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10017, 10001, "-1");
+          robotName = "BotPocPopular_LoginInvalido";
+          if ((actualMessage.substring(1, 5)).equals("Algo")) {
+              System.out.println("CASO OK");
+              result = true;
+              ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
+          } else {
+              System.out.println("CASO FALLIDO");
+              ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto algo salio mal");
 
-        String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Algo')]","xpath",15).getText();
-
-        TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10017, 10001, "-1");
-        robotName="BotPocPopular_LoginInvalido";
-        if((actualMessage.substring(1, 5)).equals("Algo")){
-            System.out.println("CASO OK"); result = true;
-            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
-        }else{
-            System.out.println("CASO FALLIDO");
-            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto algo salio mal");
-
-        }
-
-        MatcherAssert.assertThat ((actualMessage.substring(1, 5)), is("Algo"));
+          }
+          MatcherAssert.assertThat((actualMessage.substring(1, 5)), is("Algo"));
+      }catch (Exception e){
+          TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
+          robotName="BotPocPopular_LoginInvalido";
+          ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "Se produjo un error de ambiente");
+          System.out.println("error de ambiente");
+      }
 
     }
 
@@ -133,20 +138,30 @@ public class Steps {
 
     @Then("Applications show message Escribe tu contrasena")
     public void applicationShowsMessageEscribeTuContrasena() throws JsonProcessingException {
-        String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Escribe')]","xpath",15).getText();
 
-        TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
-        robotName="BotPocPopular_LoginValido";
-        if((actualMessage.substring(0, 7)).equals("Escribe")){
+        try {
+            String actualMessage =  Utilities.esperarElemento("//h4[contains(text(),'Escribe')]","xpath",15).getText();
+            TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
+            robotName="BotPocPopular_LoginValido";
+            if ((actualMessage.substring(0, 7)).equals("Escribe")) {
 
-            System.out.println("CASO OK"); result = true;
-            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
-        }else{
-            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto escribe la contraseña");
-            System.out.println("CASO FALLIDO");
+                System.out.println("CASO OK");
+                result = true;
+                ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getPassStatus(), "Prueba OK");
+            } else {
+                ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "No se encontro el texto escribe la contraseña");
+                System.out.println("CASO FALLIDO");
+            }
+
+            MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
+        }catch (Exception e){
+            TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
+            robotName="BotPocPopular_LoginValido";
+            ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "Se produjo un error de ambiente");
+            System.out.println("error de ambiente");
         }
 
-        MatcherAssert.assertThat ((actualMessage.substring(0, 7)), is("Escribe"));
+
 
 
     }
