@@ -119,7 +119,7 @@ public class Steps {
           }
           MatcherAssert.assertThat((actualMessage.substring(1, 5)), is("Algo"));
       }catch (Exception e){
-          TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10016, 10001, "-1");
+          TestCaseExecution executionDto = ZephyrClient.createTestCaseExecution(Configuracion.zcv1, 10000, 10017, 10001, "-1");
           robotName="BotPocPopular_LoginInvalido";
           ZephyrClient.updateTestExecutionStatus(Configuracion.zcv1, executionDto, Status.getFailStatus(), "Se produjo un error de ambiente");
           System.out.println("error de ambiente");
