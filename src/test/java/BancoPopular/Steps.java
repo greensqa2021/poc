@@ -94,7 +94,7 @@ public class Steps {
         Configuracion.driver.switchTo().window(tabs2.get(1));
         Configuracion.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         //Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).click();
-        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("877878877");
+        Configuracion.driver.findElement(By.xpath("/html/body/app-root/main/app-auth/div/div[2]/div/app-login/div/form/div/div[2]/input")).sendKeys("1233211232");
     }
 
     @And("A User clicks on continue button")
