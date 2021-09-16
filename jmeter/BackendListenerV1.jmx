@@ -92,7 +92,7 @@
             </elementProp>
             <elementProp name="TAG_RobotAuthor " elementType="Argument">
               <stringProp name="Argument.name">TAG_RobotAuthor </stringProp>
-              <stringProp name="Argument.value">ribarras</stringProp>
+              <stringProp name="Argument.value">ribarra</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="TAG_ComputerName" elementType="Argument">
