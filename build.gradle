@@ -15,7 +15,31 @@ configurations {
     }
 }
 
-task cucumber() {
+task loginValido() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--tags',@loginValido,'--plugin', 'pretty', '--glue', 'BancoPopular', 'src/test/resources']
+        }
+    }
+}
+
+
+task loginInvalido() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--tags',@loginInValido,'--plugin', 'pretty', '--glue', 'BancoPopular', 'src/test/resources']
+        }
+    }
+}
+
+
+task runAll() {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
