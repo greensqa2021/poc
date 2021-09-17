@@ -1,6 +1,7 @@
 @login
   Feature: Do Login
 
+    @loginValido
     Scenario: login with invalid ID
       Given Navigate to page BancoPopular
       When A User clicks on persons button
@@ -8,6 +9,7 @@
       And A User clicks on continue button
       Then Applications show message Algo Salio Mal
 
+    @loginInValido
     Scenario: login with valid ID
       Given Navigate to page BancoPopular
       When A User clicks on persons button
