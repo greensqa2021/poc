@@ -81,7 +81,7 @@ public class Steps {
         Configuracion.driver.findElement(By.xpath("/html/body/div/div[2]/div/div[2]/div[2]/div/section/div[2]/div/div/a")).click();
     }
 
-    @And("A User clicks on persons button")
+    @When("A User clicks on persons button")
     public void aUserClicksOnPersonsButton() {
         Configuracion.driver.findElement(By.id("newbp-mp-zona-transaccional-personas")).click();
     }
